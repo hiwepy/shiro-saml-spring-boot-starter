@@ -30,14 +30,21 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-		<buji-pac4j.version>3.0.0</buji-pac4j.version>
-		<cas-client.version>3.5.0</cas-client.version>
 		<commons-codec.version>1.11</commons-codec.version>
  		<commons-lang3.version>3.5</commons-lang3.version>
  		<commons-io.version>2.6</commons-io.version>
-		<shiro.version>1.4.0</shiro.version>
+ 		
+ 		<opensaml.version>3.3.0</opensaml.version>
+        <joda-time.version>2.9.2</joda-time.version>
+        <velocity.version>1.7</velocity.version>
+        <!-- The dependency to commons-collections 3.2.2 is explicitly made to replace 3.2.1 (vulnerable) used by
+        velocity 1.7. It can be removed as soon as velocity 1.7 is not used anymore-->
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <cryptacular.version>1.1.0</cryptacular.version>
+        <xalan.version>2.7.2</xalan.version>
+        <java-support.version>7.3.0</java-support.version>
+        
 		<shiro-biz.version>1.0.0-SNAPSHOT</shiro-biz.version>
-		<pac4j.version>2.2.1</pac4j.version>
 	</properties>
 	
 	<dependencies>
@@ -108,73 +115,140 @@
 		    <version>${commons-io.version}</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/io.buji/buji-pac4j -->
+		<!-- http://mvnrepository.com/artifact/org.opensaml, https://www.jianshu.com/p/d041935641b4 -->
 		<dependency>
-		    <groupId>io.buji</groupId>
-		    <artifactId>buji-pac4j</artifactId>
-		    <version>${buji-pac4j.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.pac4j -->
-		<dependency>
-		    <groupId>org.pac4j</groupId>
-		    <artifactId>pac4j-saml</artifactId>
-		   <version>${pac4j.version}</version>
-		</dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-core</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.shibboleth.utilities</groupId>
+            <artifactId>java-support</artifactId>
+            <version>${java-support.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-messaging-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-messaging-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-profile-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-profile-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-saml-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-saml-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-security-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-security-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-soap-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-soap-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-storage-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-storage-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-xacml-saml-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-xacml-saml-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-xmlsec-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-xmlsec-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>24.0-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cryptacular</groupId>
+            <artifactId>cryptacular</artifactId>
+            <version>${cryptacular.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                    <groupId>org.bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>${xalan.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>${velocity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
 		
-		
-		<!-- https://mvnrepository.com/artifact/org.jasig.cas.client/cas-client-support-saml -->
+		<!-- https://github.com/vindell/spring-boot-starter-shiro-biz -->
 		<dependency>
-		    <groupId>org.jasig.cas.client</groupId>
-		    <artifactId>cas-client-support-saml</artifactId>
-		    <version>${cas-client.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.shiro -->
-		
-		<!-- Apache Shiro是一个强大的，易用的Java安全框架。它被用作于认证，授权，加密，session管理。依赖于Shiro简单易懂的API，就可以快速的构建包括手机，大型web和商业应用。 -->
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-spring-boot-starter</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-spring-boot-web-starter</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-core</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-web</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-spring</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-ehcache</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-quartz</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-aspectj</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.github.vindell</groupId>
-			<artifactId>shiro-biz</artifactId>
+			<groupId>com.github.vindell</groupId>
+			<artifactId>spring-boot-starter-shiro-biz</artifactId>
 			<version>${shiro-biz.version}</version>
 		</dependency>
 		
