@@ -7,21 +7,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.Filter;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.biz.realm.PrincipalRealmListener;
 import org.apache.shiro.biz.spring.ShiroFilterProxyFactoryBean;
-import org.apache.shiro.biz.web.filter.authc.LoginListener;
-import org.apache.shiro.biz.web.filter.authc.LogoutListener;
+import org.apache.shiro.biz.web.filter.authc.listener.LoginListener;
+import org.apache.shiro.biz.web.filter.authc.listener.LogoutListener;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.boot.cache.ShiroEhCacheConfiguration;
+import org.apache.shiro.spring.boot.saml2.utils.OpenSAMLUtils;
 import org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
+import org.opensaml.core.config.InitializationException;
+import org.opensaml.core.config.InitializationService;
+import org.opensaml.core.xml.XMLObjectBuilderFactory;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
+import org.opensaml.saml.saml2.core.Assertion;
+import org.opensaml.xmlsec.config.JavaCryptoValidationInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -238,7 +246,22 @@ public class ShiroSamlAutoConfiguration implements ApplicationContextAware {
 	private ApplicationContext applicationContext;
 	
 	@Autowired
-	private ShiroSamlProperties properties;
+	private ShiroBizProperties properties;
+	
+	@PostConstruct
+	public void init() {
+		JavaCryptoValidationInitializer javaCryptoValidationInitializer = new JavaCryptoValidationInitializer();
+		try {
+			javaCryptoValidationInitializer.init();
+		} catch (InitializationException e) {
+			e.printStackTrace();
+		}
+		try {
+			InitializationService.initialize();
+		} catch (InitializationException e) {
+			new RuntimeException("Initialization failed");
+		}
+	}
 	
 	/**
 	 * 登录监听：实现该接口可监听账号登录失败和成功的状态，从而做业务系统自己的事情，比如记录日志
@@ -324,6 +347,30 @@ public class ShiroSamlAutoConfiguration implements ApplicationContextAware {
 	@Bean
 	@ConditionalOnMissingBean
 	protected ShiroFilterChainDefinition shiroFilterChainDefinition() {
+		
+		XMLObjectBuilderFactory builderFactory = XMLObjectProviderRegistrySupport.getBuilderFactory(); 
+		Assertion assertion = (Assertion) builderFactory.getBuilder(Assertion.DEFAULT_ELEMENT_NAME).buildObject(Assertion.DEFAULT_ELEMENT_NAME);
+
+		OpenSAMLUtils.buildSAMLObject(Assertion.class);
+		
+		
+		// Step 1: OpenSAML初始化过程
+
+		/*OpenSAML的初始化依赖于一些列配置文件。OpenSAML已经有一个默认的配置，其已经可以满足大多数的使用需求，如果有需要还可以对其修改。
+		配置文件必须在OpenSAML使用之前被加载，加载默认配置需的方法如下进行：*/
+		try {
+			InitializationService.initialize();
+		} catch (InitializationException e1) {
+			e1.printStackTrace();
+		}
+		
+		JavaCryptoValidationInitializer javaCryptoValidationInitializer = new JavaCryptoValidationInitializer(); 
+		try {
+			javaCryptoValidationInitializer.init();
+		} catch (InitializationException e) {
+			e.printStackTrace();
+		}
+
 		DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
 		Map<String /* pattert */, String /* Chain names */> pathDefinitions = properties.getFilterChainDefinitionMap();
 		if (MapUtils.isNotEmpty(pathDefinitions)) {
