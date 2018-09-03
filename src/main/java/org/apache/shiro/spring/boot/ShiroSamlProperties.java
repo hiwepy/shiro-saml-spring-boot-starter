@@ -15,6 +15,7 @@
  */
 package org.apache.shiro.spring.boot;
 
+import org.apache.shiro.spring.boot.saml2.AuthnContextComparisonType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(ShiroSamlProperties.PREFIX)
@@ -27,15 +28,17 @@ public class ShiroSamlProperties {
 	 */
 	private boolean enabled = false;
 
-	/** 登录地址：会话不存在时访问的地址 */
-	private String loginUrl;
-	/** 重定向地址：会话注销后的重定向地址 */
-    private String redirectUrl;
-	/** 系统主页：登录成功后跳转路径 */
-    private String successUrl;
+	/** 目标URL：AuthnRequest的目标地址，IDP地址 */
+	private String destinationURL;
+	/** SP地址： SAML断言返回的地址 */
+    private String assertionConsumerServiceURL;
+	/** SPID：一般是SP的URL */
+    private String spEntityId;
     /** 异常页面：无权限时的跳转路径 */
     private String unauthorizedUrl;
-	
+    private boolean forceAuthn;
+    /** */
+    private AuthnContextComparisonType comparisonType = AuthnContextComparisonType.minimum;
 	
 	public boolean isEnabled() {
 		return enabled;
@@ -45,28 +48,28 @@ public class ShiroSamlProperties {
 		this.enabled = enabled;
 	}
 
-	public String getLoginUrl() {
-		return loginUrl;
+	public String getDestinationURL() {
+		return destinationURL;
 	}
 
-	public void setLoginUrl(String loginUrl) {
-		this.loginUrl = loginUrl;
+	public void setDestinationURL(String destinationURL) {
+		this.destinationURL = destinationURL;
 	}
 
-	public String getRedirectUrl() {
-		return redirectUrl;
+	public String getAssertionConsumerServiceURL() {
+		return assertionConsumerServiceURL;
 	}
 
-	public void setRedirectUrl(String redirectUrl) {
-		this.redirectUrl = redirectUrl;
+	public void setAssertionConsumerServiceURL(String assertionConsumerServiceURL) {
+		this.assertionConsumerServiceURL = assertionConsumerServiceURL;
 	}
 
-	public String getSuccessUrl() {
-		return successUrl;
+	public String getSpEntityId() {
+		return spEntityId;
 	}
 
-	public void setSuccessUrl(String successUrl) {
-		this.successUrl = successUrl;
+	public void setSpEntityId(String spEntityId) {
+		this.spEntityId = spEntityId;
 	}
 
 	public String getUnauthorizedUrl() {
@@ -77,7 +80,21 @@ public class ShiroSamlProperties {
 		this.unauthorizedUrl = unauthorizedUrl;
 	}
 	
-	
+	public boolean isForceAuthn() {
+		return forceAuthn;
+	}
+
+	public void setForceAuthn(boolean forceAuthn) {
+		this.forceAuthn = forceAuthn;
+	}
+
+	public AuthnContextComparisonType getComparisonType() {
+		return comparisonType;
+	}
+
+	public void setComparisonType(AuthnContextComparisonType comparisonType) {
+		this.comparisonType = comparisonType;
+	}
 
 }
 
