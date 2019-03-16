@@ -367,6 +367,7 @@
 		<commons-codec.version>1.11</commons-codec.version>
  		<commons-lang3.version>3.5</commons-lang3.version>
  		<commons-io.version>2.6</commons-io.version>
+ 		<guava.version>27.1-jre</guava.version> 
  		<maven.version>3.0</maven.version>
        	<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -374,7 +375,7 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.vertsion>2.22.1</maven-surefire-plugin.vertsion>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
- 		<opensaml.version>3.3.0</opensaml.version>
+ 		<opensaml.version>3.4.2</opensaml.version>
         <joda-time.version>2.9.2</joda-time.version>
         <velocity.version>1.7</velocity.version>
         <!-- The dependency to commons-collections 3.2.2 is explicitly made to replace 3.2.1 (vulnerable) used by
@@ -545,12 +546,10 @@
             <artifactId>opensaml-xmlsec-impl</artifactId>
             <version>${opensaml.version}</version>
         </dependency>
-        
-        
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>24.0-jre</version>
+            <version>${guava.version}</version>
         </dependency>
         <dependency>
             <groupId>org.cryptacular</groupId>
