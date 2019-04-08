@@ -18,13 +18,13 @@ package org.apache.shiro.spring.boot;
 import org.apache.shiro.spring.boot.saml.AuthnContextComparisonType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(ShiroSamlProperties.PREFIX)
-public class ShiroSamlProperties {
+@ConfigurationProperties(ShiroSaml2Properties.PREFIX)
+public class ShiroSaml2Properties {
 
-	public static final String PREFIX = "shiro.saml";
+	public static final String PREFIX = "shiro.saml2";
 	
 	/**
-	 * Enable Shiro Saml.
+	 * Enable Shiro Saml2.
 	 */
 	private boolean enabled = false;
 

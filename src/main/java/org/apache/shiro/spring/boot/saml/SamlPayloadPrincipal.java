@@ -13,24 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.shiro.spring.boot.saml2.authc;
+package org.apache.shiro.spring.boot.saml;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
 
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
+/**
+ * TODO
+ * @author 		： <a href="https://github.com/vindell">vindell</a>
+ */
+@SuppressWarnings("serial")
+public class SamlPayloadPrincipal extends ShiroPrincipal {
 
-public class Saml2AuthenticatingFilter extends AuthenticatingFilter{
-
-	@Override
-	protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
-		return null;
+	// SAMLRequest 字符串
+	private final String payload;
+	
+	public SamlPayloadPrincipal(String payload) {
+		this.payload = payload;
 	}
-
-	@Override
-	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-		return false;
+	
+	public String getPayload() {
+		return payload;
 	}
 	
 }

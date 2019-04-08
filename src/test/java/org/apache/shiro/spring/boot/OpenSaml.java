@@ -13,35 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.shiro.spring.boot.saml2.utils;
+package org.apache.shiro.spring.boot;
 
-import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.UUID;
 
-import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.hibernate.internal.util.xml.XMLHelper;
 import org.joda.time.DateTime;
-import org.opensaml.core.config.Configuration;
+import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
-import org.opensaml.core.xml.XMLObjectBuilderFactory;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
-import org.opensaml.core.xml.io.Marshaller;
-import org.opensaml.core.xml.io.MarshallerFactory;
-import org.opensaml.core.xml.io.Unmarshaller;
-import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.common.xml.SAMLConstants;
 import org.opensaml.saml.saml2.core.AuthnContextClassRef;
 import org.opensaml.saml.saml2.core.AuthnContextComparisonTypeEnumeration;
 import org.opensaml.saml.saml2.core.AuthnRequest;
 import org.opensaml.saml.saml2.core.Issuer;
-import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.NameIDPolicy;
 import org.opensaml.saml.saml2.core.RequestedAuthnContext;
 import org.opensaml.saml.saml2.core.impl.AuthnContextClassRefBuilder;
@@ -49,74 +36,32 @@ import org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 import org.opensaml.saml.saml2.core.impl.NameIDPolicyBuilder;
 import org.opensaml.saml.saml2.core.impl.RequestedAuthnContextBuilder;
-import org.w3c.dom.Document;
+import org.opensaml.xml.util.XMLHelper;
+import org.opensaml.xmlsec.config.impl.JavaCryptoValidationInitializer;
 import org.w3c.dom.Element;
 
-/**
- * TODO
- * 
- * @author ： <a href="https://github.com/vindell">vindell</a>
- */
+public class OpenSaml {
 
-public class AuthnRequestUtils {
+	static {
+		// Step 1: OpenSAML初始化过程
 
-	static String xmlString = "<?xml version=\"1.0\"?>" + "  <!DOCTYPE address" + "  ["
-			+ "     <!ELEMENT address (buildingnumber, street, city, state, zip)>"
-			+ "     <!ATTLIST address xmlns CDATA #IMPLIED>" + "     <!ELEMENT buildingnumber (#PCDATA)>"
-			+ "     <!ELEMENT street (#PCDATA)>" + "     <!ELEMENT city (#PCDATA)>" + "     <!ELEMENT state (#PCDATA)>"
-			+ "     <!ELEMENT zip (#PCDATA)>" + "  ]>" + "" + "  <address>"
-			+ "    <buildingnumber> 29 </buildingnumber>" + "    <street> South Street</street>"
-			+ "    <city>Vancouver</city>" + "" + "    <state>BC</state>" + "    <zip>V6V 4U7</zip>" + "  </address>";
-
-	public static void main(String[] args) {
-
+		JavaCryptoValidationInitializer javaCryptoValidationInitializer = new JavaCryptoValidationInitializer();
 		try {
-
-			InitializationService.initialize();
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
-			Document document = docBuilder.parse(new ByteArrayInputStream(xmlString.trim().getBytes()));
-			Element element = document.getDocumentElement();
-			UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
-			org.opensaml.core.xml.io.Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(element); // This
-																												// is
-																												// coming
-																												// out
-																												// be
-																												// null
-			System.out.println(unmarshaller);
-		} catch (Exception e) {
+			javaCryptoValidationInitializer.init();
+		} catch (InitializationException e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	/**
-	 * 创建AutheRequest对象
-	 * 
-	 * @author
-	 * @param idpSsoUrl
-	 * @param acsUrl
-	 * @param spEntityId
-	 * @return
-	 */
-	public static AuthnRequest createRequest(String idpSsoUrl, String acsUrl, String spEntityId) {
-		AuthnRequest authnRequest = OpenSAMLUtils.create(AuthnRequest.class, AuthnRequest.DEFAULT_ELEMENT_NAME);
-		authnRequest.setIssueInstant(new DateTime());
-		authnRequest.setDestination(idpSsoUrl);
-		authnRequest.setProtocolBinding(SAMLConstants.SAML2_POST_BINDING_URI);
-		authnRequest.setID(UUID.randomUUID().toString());
-		authnRequest.setAssertionConsumerServiceURL(acsUrl);
-
-		Issuer issuer = OpenSAMLUtils.create(Issuer.class, Issuer.DEFAULT_ELEMENT_NAME);
-		issuer.setValue(spEntityId);
-		authnRequest.setIssuer(issuer);
-
-		NameIDPolicy nameIDPolicy = OpenSAMLUtils.create(NameIDPolicy.class, NameIDPolicy.DEFAULT_ELEMENT_NAME);
-		nameIDPolicy.setAllowCreate(true);
-		nameIDPolicy.setFormat(NameID.UNSPECIFIED);
-		authnRequest.setNameIDPolicy(nameIDPolicy);
-		return authnRequest;
+		/*
+		 * OpenSAML的初始化依赖于一些列配置文件。OpenSAML已经有一个默认的配置，其已经可以满足大多数的使用需求，如果有需要还可以对其修改。
+		 * 配置文件必须在OpenSAML使用之前被加载，加载默认配置需的方法如下进行：
+		 */
+		try {
+			InitializationService.initialize();
+			// XMLObjectProviderRegistrySupport.
+		} catch (InitializationException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	public void generateRequestURL() throws Exception {
@@ -156,14 +101,8 @@ public class AuthnRequestUtils {
 		requestedAuthnContext.getAuthnContextClassRefs().add(authnContextClassRef);
 		authnRequest.setRequestedAuthnContext(requestedAuthnContext);
 
-		UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
-		MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
-		XMLObjectBuilderFactory builderFactory = XMLObjectProviderRegistrySupport.getBuilderFactory();
-
-		Marshaller marshaller = marshallerFactory.getMarshaller(authnRequest);
-		Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller((QName) null); // This is coming out be null
-		System.out.println(unmarshaller);
-
+		org.opensaml.core.xml.io.Marshaller marshaller = XMLObjectProviderRegistrySupport.getMarshallerFactory()
+				.getMarshaller(authnRequest);
 		Element authDOM = marshaller.marshall(authnRequest);
 		StringWriter requestWriter = new StringWriter();
 		XMLHelper.writeNode(authDOM, requestWriter);
@@ -172,4 +111,9 @@ public class AuthnRequestUtils {
 
 	}
 
+	public static void main(String[] args) throws Exception {
+		OpenSaml openSaml = new OpenSaml();
+		openSaml.generateRequestURL();
+	}
+	
 }

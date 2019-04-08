@@ -41,12 +41,12 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * SAML 1.x 认证 (authentication)过滤器
+ * SAML 2.x 认证 (authentication)过滤器
  * @author ： <a href="https://github.com/vindell">vindell</a>
  */
-public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter {
+public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SamlAuthenticatingFilter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Saml2AuthenticatingFilter.class);
 	
 	/**
      * HTTP Authorization header, equal to <code>Authorization</code>
@@ -57,7 +57,7 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 	protected static final String AUTHORIZATION_PARAM =  "SAMLRequest";
 	private String authorizationParamName = AUTHORIZATION_PARAM;
     
-	public SamlAuthenticatingFilter() {
+	public Saml2AuthenticatingFilter() {
 		super();
 	}
 	
@@ -78,7 +78,7 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 				} catch (AuthenticationException e) {
 					//Step 4、执行授权失败后的函数
 					return onAccessFailure(token, e, request, response);
-				}
+				} 
 			}
 			// 要求认证
 			return false;

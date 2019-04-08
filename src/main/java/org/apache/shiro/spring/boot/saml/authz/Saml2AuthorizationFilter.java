@@ -23,12 +23,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * SAML 1.x 授权 (authorization)过滤器
+ * SAML 2.x 授权 (authorization)过滤器
  * @author ： <a href="https://github.com/vindell">vindell</a>
  */
-public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
+public class Saml2AuthorizationFilter extends AbstracAuthorizationFilter {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SamlAuthorizationFilter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Saml2AuthorizationFilter.class);
 	/**
      * HTTP Authorization header, equal to <code>Authorization</code>
      */

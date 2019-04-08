@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.shiro.spring.boot.saml2.utils;
+package org.apache.shiro.spring.boot;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -27,13 +27,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.codec.binary.Base64;
-import org.opensaml.core.config.Configuration;
-import org.opensaml.core.xml.XMLObject;
-import org.opensaml.core.xml.io.Unmarshaller;
-import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Response;
-import org.opensaml.security.x509.BasicX509Credential;
+import org.opensaml.xml.Configuration;
+import org.opensaml.xml.XMLObject;
+import org.opensaml.xml.io.Unmarshaller;
+import org.opensaml.xml.io.UnmarshallerFactory;
+import org.opensaml.xml.security.x509.BasicX509Credential;
+import org.opensaml.xmlsec.signature.Signature;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -70,12 +71,12 @@ public class SAMLResponseHandler {
 		X509Certificate certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
 		inputStream.close();
 
-		BasicX509Credential credential = new BasicX509Credential(null);
+		BasicX509Credential credential = new BasicX509Credential();
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 		X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(certificate.getPublicKey().getEncoded());
 		PublicKey key = keyFactory.generatePublic(publicKeySpec);
 		credential.setPublicKey(key);
-		
+
 		// Parse response
 		byte[] base64DecodedResponse = Base64.decodeBase64(responseMessage);
 
@@ -86,7 +87,7 @@ public class SAMLResponseHandler {
 		Document document = docBuilder.parse(is);
 		Element element = document.getDocumentElement();
 
-		UnmarshallerFactory unmarshallerFactory = org.opensaml.xml.Configuration.getUnmarshallerFactory();
+		UnmarshallerFactory unmarshallerFactory = Configuration.getUnmarshallerFactory();
 		Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(element);
 		XMLObject responseXmlObj = unmarshaller.unmarshall(element);
 		Response responseObj = (Response) responseXmlObj;
@@ -102,5 +103,4 @@ public class SAMLResponseHandler {
 				credential);
 		validator.validate(sig);
 	}
-	
 }
