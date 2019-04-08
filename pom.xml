@@ -387,6 +387,108 @@
         <spring-boot-starter-shiro-biz.version>1.0.4.RELEASE</spring-boot-starter-shiro-biz.version>
 	</properties>
 	
+	<dependencyManagement>
+		<dependencies>
+			<!-- http://mvnrepository.com/artifact/org.opensaml, https://www.jianshu.com/p/d041935641b4 -->
+			<dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-core</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>net.shibboleth.utilities</groupId>
+	            <artifactId>java-support</artifactId>
+	            <version>${java-support.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-messaging-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-messaging-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-profile-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-profile-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-saml-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-saml-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-security-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-security-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-soap-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-soap-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-storage-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-storage-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-xacml-saml-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-xacml-saml-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-xmlsec-api</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opensaml</groupId>
+	            <artifactId>opensaml-xmlsec-impl</artifactId>
+	            <version>${opensaml.version}</version>
+	        </dependency>
+	        <!-- https://mvnrepository.com/artifact/org.opensaml/xmltooling -->
+			<dependency>
+			    <groupId>org.opensaml</groupId>
+			    <artifactId>xmltooling</artifactId>
+			    <version>1.4.6</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		
 		<!-- Java Servlet API -->
@@ -459,98 +561,78 @@
 		<dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-core</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>net.shibboleth.utilities</groupId>
             <artifactId>java-support</artifactId>
-            <version>${java-support.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-messaging-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-messaging-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-profile-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-profile-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-saml-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-saml-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-security-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-security-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-soap-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-soap-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-storage-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-storage-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-xacml-saml-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-xacml-saml-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-xmlsec-api</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-xmlsec-impl</artifactId>
-            <version>${opensaml.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.opensaml/xmltooling -->
 		<dependency>
 		    <groupId>org.opensaml</groupId>
 		    <artifactId>xmltooling</artifactId>
-		    <version>1.4.6</version>
 		</dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
