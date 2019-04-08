@@ -22,12 +22,12 @@ import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
  * @author 		： <a href="https://github.com/vindell">vindell</a>
  */
 @SuppressWarnings("serial")
-public class Sam2lPayloadPrincipal extends ShiroPrincipal {
+public class Saml2PayloadPrincipal extends ShiroPrincipal {
 
 	// SAMLRequest 字符串
 	private final String payload;
 	
-	public Sam2lPayloadPrincipal(String payload) {
+	public Saml2PayloadPrincipal(String payload) {
 		this.payload = payload;
 	}
 	

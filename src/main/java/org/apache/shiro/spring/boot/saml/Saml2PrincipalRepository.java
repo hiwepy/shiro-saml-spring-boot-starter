@@ -36,7 +36,7 @@ public class Saml2PrincipalRepository extends ShiroPrincipalRepositoryImpl {
 		
 		Saml2Token saml2Token = (Saml2Token) token;
 		
-		Sam2lPayloadPrincipal principal = new Sam2lPayloadPrincipal(saml2Token.getSAMLRequest());
+		Saml2PayloadPrincipal principal = new Saml2PayloadPrincipal(saml2Token.getSAMLRequest());
 		
 		/*
 		principal.setUserid(payload.getClientId());
