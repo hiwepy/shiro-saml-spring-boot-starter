@@ -384,7 +384,7 @@
         <cryptacular.version>1.1.0</cryptacular.version>
         <xalan.version>2.7.2</xalan.version>
         <java-support.version>7.3.0</java-support.version>
-        <spring-boot-starter-shiro-biz.version>1.0.4.RELEASE</spring-boot-starter-shiro-biz.version>
+        <spring-boot-starter-shiro-biz.version>1.0.5-SNAPSHOT</spring-boot-starter-shiro-biz.version>
 	</properties>
 	
 	<dependencyManagement>
