@@ -35,6 +35,7 @@ import org.opensaml.xml.io.Unmarshaller;
 import org.opensaml.xml.io.UnmarshallerFactory;
 import org.opensaml.xml.security.x509.BasicX509Credential;
 import org.opensaml.xmlsec.signature.Signature;
+import org.opensaml.xmlsec.signature.support.SignatureValidator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -98,9 +99,8 @@ public class SAMLResponseHandler {
 				.getAudienceURI();
 		String statusCode = responseObj.getStatus().getStatusCode().getValue();
 
-		org.opensaml.xml.signature.Signature sig = assertion.getSignature();
-		org.opensaml.xml.signature.SignatureValidator validator = new org.opensaml.xml.signature.SignatureValidator(
-				credential);
-		validator.validate(sig);
+		Signature sig = assertion.getSignature();
+		
+		SignatureValidator.validate(sig, null);
 	}
 }

@@ -15,6 +15,7 @@
  */
 package org.apache.shiro.spring.boot.saml.authc;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,8 @@ import org.apache.shiro.spring.boot.saml.token.SamlToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSONObject;
 
 
 /**
@@ -101,7 +104,8 @@ public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter
 				if (LOG.isTraceEnabled()) {
 					LOG.trace(mString);
 				}
-				WebUtils.writeJSONString(response, HttpServletResponse.SC_BAD_REQUEST, mString);
+				WebUtils.getHttpResponse(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				JSONObject.writeJSONString(response.getWriter(), mString);
 				return false;
 			}
 		}
@@ -118,8 +122,8 @@ public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("status", "fail");
 			data.put("message", mString);
-			// 响应
-			WebUtils.writeJSONString(response, data);
+			
+			JSONObject.writeJSONString(response.getWriter(), data);
 			
 			return false;
 		}
@@ -153,7 +157,7 @@ public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter
 		data.put("principal", mapPrincipal);
 		
 		// 响应
-		WebUtils.writeJSONString(response, data);
+		JSONObject.writeJSONString(response.getWriter(), data);
 		
 		// we handled the success , prevent the chain from continuing:
 		return false;
@@ -190,7 +194,12 @@ public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter
 			data.put("message", StringUtils.hasText(rootCause) ? rootCause : ExceptionUtils.getMessage(e));
 		}
 		
-		WebUtils.writeJSONString(response, data);
+		try {
+			JSONObject.writeJSONString(response.getWriter(), data);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		return false;
 	}
 	

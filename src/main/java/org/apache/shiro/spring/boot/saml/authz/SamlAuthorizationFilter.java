@@ -22,6 +22,8 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * SAML 1.x 授权 (authorization)过滤器
  * @author ： <a href="https://github.com/vindell">vindell</a>
@@ -73,7 +75,7 @@ public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
 		data.put("status", "fail");
 		data.put("message", mString);
 		// 响应
-		WebUtils.writeJSONString(response, data);
+		JSONObject.writeJSONString(response.getWriter(), data);
 		
 		return false;
 	}
@@ -83,9 +85,8 @@ public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
 		return false;
 	}
 
-	@Override
 	protected boolean onAccessFailure(Object mappedValue, Exception e, ServletRequest request,
-			ServletResponse response) {
+			ServletResponse response) throws IOException {
 
 		LOG.error("Host {} JWT Authentication Failure : {}", getHost(request), e.getMessage());
 
@@ -111,7 +112,7 @@ public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
 			String rootCause = ExceptionUtils.getRootCauseMessage(e);
 			data.put("message", StringUtils.hasText(rootCause) ? rootCause : ExceptionUtils.getMessage(e));
 		}
-		WebUtils.writeJSONString(response, data);
+		JSONObject.writeJSONString(response.getWriter(), data);
 		return false;
 	}
 
