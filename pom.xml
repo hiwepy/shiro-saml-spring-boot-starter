@@ -14,7 +14,7 @@
 	<description>Spring Boot Starter For Shiro With Saml</description>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
-	<url>https://github.com/vindell/${project.artifactId}</url>
+	<url>https://github.com/hiwepy/${project.artifactId}</url>
 	<packaging>jar</packaging>
 
 	<licenses>
@@ -25,15 +25,15 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:https:github.com/vindell/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:https:github.com/vindell/${project.artifactId}.git</developerConnection>
-		<url>https:github.com/vindell/${project.artifactId}</url>
+		<connection>scm:git:https:github.com/hiwepy/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:https:github.com/hiwepy/${project.artifactId}.git</developerConnection>
+		<url>https:github.com/hiwepy/${project.artifactId}</url>
 		<tag>${project.artifactId}</tag>
 	</scm>
 
 	<developers>
 		<developer>
-			<name>vindell</name>
+			<name>wandl</name>
 			<email>hnxyhcwdl1003@163.com</email>
 			<roles>
 				<role>developer</role>
@@ -384,7 +384,7 @@
         <cryptacular.version>1.1.0</cryptacular.version>
         <xalan.version>2.7.2</xalan.version>
         <java-support.version>7.3.0</java-support.version>
-        <spring-boot-starter-shiro-biz.version>1.0.5-SNAPSHOT</spring-boot-starter-shiro-biz.version>
+        <spring-boot-starter-shiro-biz.version>1.0.6-SNAPSHOT</spring-boot-starter-shiro-biz.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -671,9 +671,9 @@
             <version>${commons-collections.version}</version>
         </dependency>
 		
-		<!-- https://github.com/vindell/spring-boot-starter-shiro-biz -->
+		<!-- https://github.com/hiwepy/spring-boot-starter-shiro-biz -->
 		<dependency>
-			<groupId>com.github.vindell</groupId>
+			<groupId>com.github.hiwepy</groupId>
 			<artifactId>spring-boot-starter-shiro-biz</artifactId>
 			<version>${spring-boot-starter-shiro-biz.version}</version>
 		</dependency>

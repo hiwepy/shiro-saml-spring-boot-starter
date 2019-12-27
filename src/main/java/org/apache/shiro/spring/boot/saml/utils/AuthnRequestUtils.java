@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -54,7 +54,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * @author ： <a href="https://github.com/vindell">vindell</a>
+ * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
  * https://www.jianshu.com/p/d041935641b4
  * https://www.jianshu.com/p/6f61fa7be0b6
  * https://www.jianshu.com/p/6c72408fa480
@@ -91,7 +91,7 @@ public class AuthnRequestUtils {
 	
 	/**
 	 * 
-	 * @author ： <a href="https://github.com/vindell">vindell</a>
+	 * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @param idpDestinationUrl
 	 * @param acsUrl
 	 * @param spEntityId
@@ -102,7 +102,7 @@ public class AuthnRequestUtils {
 	}
 
 	/**
-	 * @author ： <a href="https://github.com/vindell">vindell</a>
+	 * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @param idpDestinationUrl
 	 * @param acsUrl
 	 * @param spEntityId
@@ -118,7 +118,7 @@ public class AuthnRequestUtils {
 	/**
 	 * 
 	 * TODO
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
+	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @param destinationURL
 	 * @param assertionConsumerServiceURL
 	 * @param forceAuthn				: whether the IdP should force the user to reauthenticate
@@ -156,7 +156,7 @@ public class AuthnRequestUtils {
 	/**
 	 * 
 	 * 创建AutheRequest对象
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
+	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @param destinationURL				：	
 	 * @param assertionConsumerServiceURL	：
 	 * @param forceAuthn 					：whether the IdP should force the user to reauthenticate
