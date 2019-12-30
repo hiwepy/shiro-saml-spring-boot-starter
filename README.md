@@ -1,4 +1,4 @@
-# spring-boot-starter-shiro-saml
+# shiro-saml-spring-boot-starter
 shiro starter for spring boot
 
 ### 说明
@@ -13,7 +13,7 @@ shiro starter for spring boot
 ``` xml
 <dependency>
 	<groupId>${project.groupId}</groupId>
-	<artifactId>spring-boot-starter-shiro-saml</artifactId>
+	<artifactId>shiro-saml-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
 ```

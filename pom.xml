@@ -10,7 +10,8 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	
-	<artifactId>spring-boot-starter-shiro-saml</artifactId>
+	<groupId>com.github.hiwepy</groupId>
+	<artifactId>shiro-saml-spring-boot-starter</artifactId>
 	<description>Spring Boot Starter For Shiro With Saml</description>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -674,7 +675,7 @@
 		<!-- https://github.com/hiwepy/spring-boot-starter-shiro-biz -->
 		<dependency>
 			<groupId>com.github.hiwepy</groupId>
-			<artifactId>spring-boot-starter-shiro-biz</artifactId>
+			<artifactId>shiro-biz-spring-boot-starter</artifactId>
 			<version>${spring-boot-starter-shiro-biz.version}</version>
 		</dependency>
 		
