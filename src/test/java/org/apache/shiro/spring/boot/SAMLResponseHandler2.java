@@ -16,6 +16,7 @@
 package org.apache.shiro.spring.boot;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -33,7 +34,10 @@ import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Response;
-import org.opensaml.security.x509.BasicX509Credential;
+import org.opensaml.xml.security.credential.Credential;
+import org.opensaml.xml.security.x509.BasicX509Credential;
+import org.opensaml.xml.signature.SignatureValidator;
+import org.opensaml.xmlsec.signature.Signature;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -63,14 +67,14 @@ public class SAMLResponseHandler2 {
 			+ "SHHfYGDkRCVStrFN5uzPOurZKEfa9NETAKN5p2VetJ6+G9xPV05ONjDNZQLpo+VY"
 			+ "eewqdHDL2SDOiEAblF1hYy5dDb/Fjc3W0Q==";
 
-	public void handle(String responseMessage) {
+	public void handle(String responseMessage) throws Exception {
 		// Read certificate
 		CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
 		InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(certificateS.getBytes("UTF-8")));
 		X509Certificate certificate = (X509Certificate) certificateFactory.generateCertificate(inputStream);
 		inputStream.close();
 
-		BasicX509Credential credential = new BasicX509Credential(null);
+		BasicX509Credential credential = new BasicX509Credential();
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 		X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(certificate.getPublicKey().getEncoded());
 		PublicKey key = keyFactory.generatePublic(publicKeySpec);
@@ -86,9 +90,9 @@ public class SAMLResponseHandler2 {
 		Document document = docBuilder.parse(is);
 		Element element = document.getDocumentElement();
 
-		UnmarshallerFactory unmarshallerFactory = org.opensaml.xml.Configuration.getUnmarshallerFactory();
-		Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(element);
-		XMLObject responseXmlObj = unmarshaller.unmarshall(element);
+		org.opensaml.xml.io.UnmarshallerFactory unmarshallerFactory = org.opensaml.xml.Configuration.getUnmarshallerFactory();
+		org.opensaml.xml.io.Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(element);
+		org.opensaml.xml.XMLObject responseXmlObj = unmarshaller.unmarshall(element);
 		Response responseObj = (Response) responseXmlObj;
 		Assertion assertion = responseObj.getAssertions().get(0);
 		String subject = assertion.getSubject().getNameID().getValue();
@@ -97,10 +101,9 @@ public class SAMLResponseHandler2 {
 				.getAudienceURI();
 		String statusCode = responseObj.getStatus().getStatusCode().getValue();
 
-		org.opensaml.xml.signature.Signature sig = assertion.getSignature();
-		org.opensaml.xml.signature.SignatureValidator validator = new org.opensaml.xml.signature.SignatureValidator(
-				credential);
-		validator.validate(sig);
+		Signature sig = assertion.getSignature();
+		SignatureValidator validator = new SignatureValidator(credential);
+		validator.validate((org.opensaml.xml.signature.Signature) sig);
 	}
 	
 }

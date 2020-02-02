@@ -132,7 +132,7 @@ public class AuthnRequestUtil {
 //      rx.setComparison(arg0);
 //      authnRequest.setRequestedAuthnContext(arg0);
 
-        Logger.info("AUTHNREQUEST: "+authnRequest.toString());
+        //Logger.info("AUTHNREQUEST: "+authnRequest.toString());
 
         Marshaller marshaller = Configuration.getMarshallerFactory().getMarshaller(authnRequest);
         /* Encoding the compressed message */

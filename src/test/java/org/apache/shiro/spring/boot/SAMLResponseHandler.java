@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.KeyFactory;
 import java.security.PublicKey;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.spec.X509EncodedKeySpec;
@@ -65,7 +66,7 @@ public class SAMLResponseHandler {
 			+ "SHHfYGDkRCVStrFN5uzPOurZKEfa9NETAKN5p2VetJ6+G9xPV05ONjDNZQLpo+VY"
 			+ "eewqdHDL2SDOiEAblF1hYy5dDb/Fjc3W0Q==";
 
-	public void handle(String responseMessage) {
+	public void handle(String responseMessage) throws Exception {
 		// Read certificate
 		CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
 		InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(certificateS.getBytes("UTF-8")));
