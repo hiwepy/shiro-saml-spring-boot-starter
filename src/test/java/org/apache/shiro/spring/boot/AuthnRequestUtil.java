@@ -66,7 +66,7 @@ public class AuthnRequestUtil {
      */
     public static void main(String[] args) {
         try {
-            DefaultBootstrap.bootstrap();
+           // DefaultBootstrap.bootstrap();
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
