@@ -117,7 +117,6 @@ public class AuthnRequestUtils {
 
 	/**
 	 * 
-	 * TODO
 	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @param destinationURL
 	 * @param assertionConsumerServiceURL
@@ -261,8 +260,6 @@ public class AuthnRequestUtils {
 		StreamResult sr = new StreamResult(sw);
 		former.transform(source, sr);
 		String result=sw.toString();
-		
-		
 
 	}
 

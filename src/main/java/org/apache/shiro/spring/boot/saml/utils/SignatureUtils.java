@@ -24,11 +24,6 @@ import org.opensaml.xml.signature.SignableXMLObject;
 import org.opensaml.xml.signature.Signature;
 import org.opensaml.xml.signature.Signer;
 
-/**
- * TODO
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
- */
-
 public class SignatureUtils {
 
 	 private void signRequest(SignableXMLObject obj) {

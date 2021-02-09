@@ -1,5 +1,7 @@
 package org.apache.shiro.spring.boot.saml.realm;
 
+import java.util.stream.Collectors;
+
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.biz.realm.AbstractAuthorizingRealm;
@@ -28,7 +30,7 @@ public class Saml2StatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		// 解析角色并设置
-		info.setRoles(principal.getRoles());
+		info.setRoles(principal.getRoles().stream().map(pair -> pair.getKey()).collect(Collectors.toSet()));
 		// 解析权限并设置
 		info.setStringPermissions(principal.getPerms());
 		return info;
