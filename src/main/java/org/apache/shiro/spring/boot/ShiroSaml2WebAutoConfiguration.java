@@ -17,7 +17,7 @@ package org.apache.shiro.spring.boot;
 
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.mgt.SubjectFactory;
