@@ -5,7 +5,7 @@ import org.apache.shiro.spring.boot.saml.token.SamlToken;
 
 /**
  * SAML 1.0 Stateful AuthorizingRealm
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author 		： <a href="https://github.com/easy-4-java">hiwepy</a>
  */
 public class SamlStatefulAuthorizingRealm extends AbstractAuthorizingRealm {
 
