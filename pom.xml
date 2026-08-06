@@ -435,6 +435,7 @@
         <xalan.version>2.7.2</xalan.version>
         <java-support.version>7.3.0</java-support.version>
         <spring-boot-starter-shiro-biz.version>1.1.2.RELEASE</spring-boot-starter-shiro-biz.version>
+                <joda-time.version>2.14.2</joda-time.version>
     </properties>
     
     <dependencyManagement>
@@ -555,7 +556,12 @@
                 <artifactId>xmltooling</artifactId>
                 <version>1.4.6</version>
             </dependency>
-        </dependencies>
+                <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+</dependencies>
     </dependencyManagement>
     
     <dependencies>
@@ -754,7 +760,7 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.10.10</version>
+            <version>${joda-time.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/xalan/xalan -->
         <dependency>
