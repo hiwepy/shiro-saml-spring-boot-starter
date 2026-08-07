@@ -12,7 +12,7 @@
     <groupId>io.github.easy4j</groupId>
     <artifactId>shiro-saml-spring-boot-starter</artifactId>
     <description>Spring Boot Starter For Shiro With Saml</description>
-    <version>2.3.x.20260527-SNAPSHOT</version>
+    <version>2.7.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <packaging>jar</packaging>
@@ -411,6 +411,7 @@
     </profiles>
     
     <properties>
+        <java.version>1.8</java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -434,7 +435,7 @@
         <cryptacular.version>1.1.0</cryptacular.version>
         <xalan.version>2.7.2</xalan.version>
         <java-support.version>7.3.0</java-support.version>
-        <spring-boot-starter-shiro-biz.version>1.1.2.RELEASE</spring-boot-starter-shiro-biz.version>
+        <spring-boot-starter-shiro-biz.version>2.7.x.20260630-SNAPSHOT</spring-boot-starter-shiro-biz.version>
                 <commons-io.version>2.22.0</commons-io.version>
                 <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
                 <joda-time.version>2.14.2</joda-time.version>
