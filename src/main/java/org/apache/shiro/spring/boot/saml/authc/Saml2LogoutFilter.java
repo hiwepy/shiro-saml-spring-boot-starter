@@ -19,7 +19,7 @@ import org.apache.shiro.biz.web.filter.authc.AbstractLogoutFilter;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class Saml2LogoutFilter extends AbstractLogoutFilter {
 	
