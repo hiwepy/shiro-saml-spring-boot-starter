@@ -45,7 +45,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * SAML 2.x 认证 (authentication)过滤器
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter {
 
