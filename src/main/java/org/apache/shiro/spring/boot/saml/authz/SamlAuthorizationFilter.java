@@ -26,7 +26,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * SAML 1.x 授权 (authorization)过滤器
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
 
