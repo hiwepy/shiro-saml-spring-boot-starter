@@ -11,7 +11,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 /**
  * SAML 1.0 Stateless AuthorizingRealm
- * @author <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class SamlStatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 
