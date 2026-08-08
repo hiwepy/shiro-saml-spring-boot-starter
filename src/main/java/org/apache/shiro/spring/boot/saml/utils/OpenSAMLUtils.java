@@ -23,7 +23,7 @@ import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import net.shibboleth.utilities.java.support.security.RandomIdentifierGenerationStrategy;
 
 /**
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @SuppressWarnings("unchecked")
 public class OpenSAMLUtils {
