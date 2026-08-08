@@ -27,7 +27,7 @@ import com.google.common.collect.Sets;
 
 /**
  * SMAL 2.0 Principal Repository
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class Saml2PrincipalRepository extends ShiroPrincipalRepositoryImpl {
     
