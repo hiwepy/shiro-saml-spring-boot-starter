@@ -54,7 +54,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  * https://www.jianshu.com/p/d041935641b4
  * https://www.jianshu.com/p/6f61fa7be0b6
  * https://www.jianshu.com/p/6c72408fa480
@@ -91,7 +91,7 @@ public class AuthnRequestUtils {
 	
 	/**
 	 * 
-	 * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param idpDestinationUrl
 	 * @param acsUrl
 	 * @param spEntityId
@@ -102,7 +102,7 @@ public class AuthnRequestUtils {
 	}
 
 	/**
-	 * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param idpDestinationUrl
 	 * @param acsUrl
 	 * @param spEntityId
@@ -117,7 +117,7 @@ public class AuthnRequestUtils {
 
 	/**
 	 * 
-	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param destinationURL
 	 * @param assertionConsumerServiceURL
 	 * @param forceAuthn				: whether the IdP should force the user to reauthenticate
@@ -155,7 +155,7 @@ public class AuthnRequestUtils {
 	/**
 	 * 
 	 * 创建AutheRequest对象
-	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param destinationURL				：	
 	 * @param assertionConsumerServiceURL	：
 	 * @param forceAuthn 					：whether the IdP should force the user to reauthenticate
