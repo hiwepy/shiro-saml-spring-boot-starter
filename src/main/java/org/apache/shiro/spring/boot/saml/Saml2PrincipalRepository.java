@@ -20,7 +20,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.biz.authz.principal.ShiroPrincipalRepositoryImpl;
-import org.apache.shiro.biz.utils.StringUtils;
+import org.springframework.util.StringUtils;
 import org.apache.shiro.spring.boot.saml.token.Saml2Token;
 
 import com.google.common.collect.Sets;

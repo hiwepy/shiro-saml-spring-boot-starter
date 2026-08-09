@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.biz.utils.StringUtils;
-import org.apache.shiro.biz.utils.WebUtils;
+import org.springframework.util.StringUtils;
+import org.apache.shiro.biz.utils.WebUtils2;
 import org.apache.shiro.biz.web.filter.authz.AbstracAuthorizationFilter;
+import org.apache.shiro.web.util.WebUtils;
 import org.apache.shiro.spring.boot.saml.exception.ExpiredSamlException;
 import org.apache.shiro.spring.boot.saml.exception.IncorrectSamlException;
 import org.apache.shiro.spring.boot.saml.exception.InvalidSamlToken;
@@ -117,7 +118,7 @@ public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
 	}
 
 	protected AuthenticationToken createSamlToken(ServletRequest request, ServletResponse response) {
-		String host = WebUtils.getRemoteAddr(request);
+		String host = WebUtils2.getRemoteAddr(request);
 		String jwtToken = getSAMLRequest(request);
 		return new SamlToken(host, jwtToken, true);
 	}

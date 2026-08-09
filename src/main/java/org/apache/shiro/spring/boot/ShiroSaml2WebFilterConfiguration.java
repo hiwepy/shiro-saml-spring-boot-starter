@@ -32,6 +32,7 @@ import org.apache.shiro.spring.boot.saml.authc.Saml2AuthenticatingFilter;
 import org.apache.shiro.spring.boot.saml.authc.Saml2LogoutFilter;
 import org.apache.shiro.spring.boot.saml.realm.Saml2StatefulAuthorizingRealm;
 import org.apache.shiro.spring.boot.saml.realm.Saml2StatelessAuthorizingRealm;
+import org.apache.shiro.spring.boot.utils.JakartaFilterAdapter;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.AbstractShiroWebFilterConfiguration;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
@@ -44,7 +45,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -68,7 +68,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnWebApplication
 @ConditionalOnClass({AuthnContextClassRef.class, RequestedAuthnContext.class})
 @ConditionalOnProperty(prefix = ShiroSaml2Properties.PREFIX, value = "enabled", havingValue = "true")
-@EnableConfigurationProperties({ ShiroSaml2Properties.class, ShiroBizProperties.class, ServerProperties.class })
+@EnableConfigurationProperties({ ShiroSaml2Properties.class, ShiroBizProperties.class })
 public class ShiroSaml2WebFilterConfiguration extends AbstractShiroWebFilterConfiguration implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
@@ -77,8 +77,6 @@ public class ShiroSaml2WebFilterConfiguration extends AbstractShiroWebFilterConf
 	private ShiroSaml2Properties pac4jProperties;
 	@Autowired
 	private ShiroBizProperties bizProperties;
-	@Autowired
-	private ServerProperties serverProperties;
 	
 	@Bean
 	@ConditionalOnMissingBean
@@ -118,21 +116,21 @@ public class ShiroSaml2WebFilterConfiguration extends AbstractShiroWebFilterConf
 	 * 账号注销filter ：处理账号注销
 	 */
 	@Bean("logout")
-	public FilterRegistrationBean<Saml2LogoutFilter> logoutFilter(@Autowired(required = false) List<LogoutListener> logoutListeners){
-		
-		FilterRegistrationBean<Saml2LogoutFilter> filterRegistration = new FilterRegistrationBean<Saml2LogoutFilter>();
-		
+	public FilterRegistrationBean<jakarta.servlet.Filter> logoutFilter(@Autowired(required = false) List<LogoutListener> logoutListeners){
+
+		FilterRegistrationBean<jakarta.servlet.Filter> filterRegistration = new FilterRegistrationBean<>();
+
 		Saml2LogoutFilter logoutFilter = new Saml2LogoutFilter();
-	    
+
 		//注销listener：实现该接口可listener账号注销failure和success的状态，从而做业务系统自己的事情，比如record日志
 		logoutFilter.setLogoutListeners(logoutListeners);
 		logoutFilter.setPostOnlyLogout(bizProperties.isPostOnlyLogout());
 		//login注销后的重定向address：直接进入login页面
 		logoutFilter.setRedirectUrl(bizProperties.getRedirectUrl());
-		
-		filterRegistration.setFilter(logoutFilter);
-		filterRegistration.setEnabled(false); 
-	    
+
+		filterRegistration.setFilter(new JakartaFilterAdapter(logoutFilter));
+		filterRegistration.setEnabled(false);
+
 	    return filterRegistration;
 	}
 	
@@ -140,7 +138,7 @@ public class ShiroSaml2WebFilterConfiguration extends AbstractShiroWebFilterConf
 	 * permission控制filter ：实现permissionauthentication
 	 */
 	@Bean("authc")
-	public FilterRegistrationBean<Saml2AuthenticatingFilter> authenticationFilter(
+	public FilterRegistrationBean<jakarta.servlet.Filter> authenticationFilter(
 			@Autowired(required = false) List<LoginListener> loginListeners, 
 			@Autowired(required = false) CaptchaResolver captchaResolver,
 			@Autowired(required = false) AuthenticatingFailureCounter authcFailureCounter,
@@ -169,8 +167,8 @@ public class ShiroSaml2WebFilterConfiguration extends AbstractShiroWebFilterConf
 		 * 自定义Filter通过@Bean注解后，被Spring Boot自动registers到了容器的Filter
 		 * chain中，这样导致的结果是，所有URL都会被自定义Filter过滤， 而不是Shiro中configuration的一部分URL。下面方式可以解决该问题
 		 */
-		FilterRegistrationBean<Saml2AuthenticatingFilter> registration = new FilterRegistrationBean<Saml2AuthenticatingFilter>(
-				authcFilter);
+		FilterRegistrationBean<jakarta.servlet.Filter> registration = new FilterRegistrationBean<>(
+				new JakartaFilterAdapter(authcFilter));
 		registration.setEnabled(false);
 		return registration;
 	}
@@ -202,10 +200,10 @@ public class ShiroSaml2WebFilterConfiguration extends AbstractShiroWebFilterConf
 	 * permission控制filter ：permission过滤链的入口
 	 */
 	@Bean(name = "filterShiroFilterRegistrationBean")
-    protected FilterRegistrationBean<AbstractShiroFilter> filterShiroFilterRegistrationBean() throws Exception {
+    protected FilterRegistrationBean<jakarta.servlet.Filter> filterShiroFilterRegistrationBean() throws Exception {
 
-        FilterRegistrationBean<AbstractShiroFilter> filterRegistrationBean = new FilterRegistrationBean<AbstractShiroFilter>();
-        filterRegistrationBean.setFilter((AbstractShiroFilter) shiroFilterFactoryBean().getObject());
+        FilterRegistrationBean<jakarta.servlet.Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new JakartaFilterAdapter((AbstractShiroFilter) shiroFilterFactoryBean().getObject()));
         filterRegistrationBean.setOrder(1);
 
         return filterRegistrationBean;

@@ -263,4 +263,10 @@ public class AuthnRequestUtils {
 
 	}
 
+	private static Document asDOMDocument(org.opensaml.core.xml.XMLObject xmlObject) throws Exception {
+		Element element = XMLObjectProviderRegistrySupport.getMarshallerFactory()
+				.getMarshaller(xmlObject).marshall(xmlObject);
+		return element.getOwnerDocument();
+	}
+
 }
