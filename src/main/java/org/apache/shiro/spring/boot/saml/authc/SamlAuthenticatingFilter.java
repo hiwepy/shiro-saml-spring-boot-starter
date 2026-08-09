@@ -44,7 +44,7 @@ import com.alibaba.fastjson.JSONObject;
 
 
 /**
- * SAML 1.x 认证 (authentication)过滤器
+ * SAML 1.x authentication (authentication)filter
  * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter {
@@ -66,24 +66,24 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-		// 判断是否无状态
+		// 判断whether无状态
 		if (isSessionStateless()) {
-			// 判断是否认证请求  
+			// 判断whetherauthenticationrequest  
 			if (!isLoginRequest(request, response) && isSamlSubmission(request, response)) {
 				// Step 1、生成无状态Token 
 				AuthenticationToken token = createSamlToken(request, response);
 				try {
-					//Step 2、委托给Realm进行登录  
+					//Step 2、委托给Realm进行login  
 					Subject subject = getSubject(request, response);
 					subject.login(token);
-					//Step 3、执行授权成功后的函数
+					//Step 3、执行authorizationsuccess后的函数
 					return onAccessSuccess(token, subject, request, response);
 				} catch (AuthenticationException e) {
-					//Step 4、执行授权失败后的函数
+					//Step 4、执行authorizationfailure后的函数
 					return onAccessFailure(token, e, request, response);
 				}
 			}
-			// 要求认证
+			// 要求authentication
 			return false;
 		}
 		return super.isAccessAllowed(request, response, mappedValue);
@@ -92,7 +92,7 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		
-		// 1、判断是否登录请求 
+		// 1、判断whetherloginrequest 
 		if (isLoginRequest(request, response)) {
 			if (isLoginSubmission(request, response)) {
 				if (LOG.isTraceEnabled()) {
@@ -109,7 +109,7 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 				return false;
 			}
 		}
-		// 2、未授权情况
+		// 2、未authorization情况
 		else if (!isSamlSubmission(request, response)) {
 			
 			String mString = String.format("Attempting to access a path which requires authentication.  %s = Authorization Header or %s = Authorization Param is not present in the request", 
@@ -118,11 +118,11 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 				LOG.trace(mString);
 			}
 			
-			// 响应成功状态信息
+			// responsesuccess状态info
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("status", "fail");
 			data.put("message", mString);
-			// 响应
+			// response
 			JSONObject.writeJSONString(response.getWriter(), data);
 			
 			return false;
@@ -135,14 +135,14 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 	protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,
 			ServletResponse response) throws Exception {
 
-		// 调用事件监听器
+		// 调用eventlistener器
 		if (getLoginListeners() != null && getLoginListeners().size() > 0) {
 			for (LoginListener loginListener : getLoginListeners()) {
 				loginListener.onSuccess(token, subject, request, response);
 			}
 		}
 
-		// 响应成功状态信息
+		// responsesuccess状态info
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("status", "success");
 		data.put("message", "Authentication Success.");
@@ -156,7 +156,7 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 		mapPrincipal.put("roles", principal.getRoles());
 		data.put("principal", mapPrincipal);
 		
-		// 响应
+		// response
 		JSONObject.writeJSONString(response.getWriter(), data);
 		
 		// we handled the success , prevent the chain from continuing:
@@ -171,11 +171,11 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 		LOG.error("Host {} JWT Authentication Failure : {}", getHost(request), e.getMessage());
 		
 		//WebUtils.getHttpResponse(response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		// 响应异常状态信息
+		// responseexception状态info
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("status", "fail");
 		
-		// Saml错误
+		// Samlerror
 		if (e instanceof IncorrectSamlException) {
 			data.put("message", "JWT is incorrect.");
 			data.put("token", "incorrect");
@@ -185,7 +185,7 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
 			data.put("message", "Invalid JWT value.");
 			data.put("token", "invalid");
 		}
-		// Saml过期
+		// Samlexpire
 		else if (e instanceof ExpiredSamlException) {
 			data.put("message", "Expired JWT value. " );
 			data.put("token", "expiry");
@@ -216,9 +216,9 @@ public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter 
     
     protected String getSAMLRequest(ServletRequest request) {
     	HttpServletRequest httpRequest = WebUtils.toHttp(request);
-        //从header中获取SAMLRequest
+        //从header中getsSAMLRequest
         String token = httpRequest.getHeader(getAuthorizationHeaderName());
-        //如果header中不存在SAMLRequest，则从参数中获取SAMLRequest
+        //如果header中不存在SAMLRequest，则从参数中getsSAMLRequest
         if (StringUtils.isEmpty(token)) {
             return httpRequest.getParameter(getAuthorizationParamName());
         }

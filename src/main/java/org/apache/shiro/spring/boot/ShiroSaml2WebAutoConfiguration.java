@@ -51,6 +51,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 // http://www.cnblogs.com/suiyueqiannian/p/9359597.html
+/**
+ * ShiroSaml2WebAutoConfiguration.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @Configuration
 @AutoConfigureBefore( name = {
 	"org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration",  // shiro-spring-boot-web-starter
@@ -69,7 +75,7 @@ public class ShiroSaml2WebAutoConfiguration extends AbstractShiroWebConfiguratio
 	@PostConstruct
 	public void init() {
 		
-		// Step 1: OpenSAML初始化过程
+		// Step 1: OpenSAMLinitializes过程
 
 		JavaCryptoValidationInitializer javaCryptoValidationInitializer = new JavaCryptoValidationInitializer();
 		try {
@@ -79,8 +85,8 @@ public class ShiroSaml2WebAutoConfiguration extends AbstractShiroWebConfiguratio
 		}
 		
 		/*
-		 * OpenSAML的初始化依赖于一些列配置文件。OpenSAML已经有一个默认的配置，其已经可以满足大多数的使用需求，如果有需要还可以对其修改。
-		 * 配置文件必须在OpenSAML使用之前被加载，加载默认配置需的方法如下进行：
+		 * OpenSAML的initializes依赖于一些列configuration文件。OpenSAML已经有一个default的configuration，其已经可以满足大多数的使用需求，如果有需要还可以对其修改。
+		 * configuration文件必须在OpenSAML使用之前被加载，加载defaultconfiguration需的方法如下进行：
 		 */
 		try {
 			InitializationService.initialize();
@@ -100,13 +106,13 @@ public class ShiroSaml2WebAutoConfiguration extends AbstractShiroWebConfiguratio
 	}
 	
 	/*
-	 * NameID：IDP对于用户身份的标识； NameID policy是SP关于NameID是如何被创建的说明；
-	 * Format指明SP需要返回什么类型的标识（SAML Artifact）； 属性AllowCreate指明IDP是否被允许当发现用户不存在时创建用户账号。
+	 * NameID：IDP对于user身份的标识； NameID policy是SP关于NameID是如何被creates的说明；
+	 * Format指明SP需要returns什么type的标识（SAML Artifact）； propertiesAllowCreate指明IDPwhether被允许当发现user不存在时createsuser账号。
 	 * 
-	 * NameID Formats: 在SAML中有多种NameID的格式存在，比如Kerberos，邮箱以及Windows域限定名称（Windows Domain Qualified Name），
+	 * NameID Formats: 在SAML中有多种NameID的格式存在，比如Kerberos，邮箱以及Windows域限定name（Windows Domain Qualified Name），
 	 * 这里要特别说明如下两种：
-	 *  持久标识（Persistent Identifier）：一个随机的ID标识被分配给用户，以避免暴露用户的真实账户。无论用户何时登入，都会返回相同的标识。 SP可以将这个标识和本地的用户账号绑定；
-	 *  临时标识（Transient Identifier）：临时标识是一个和用户账户没有关系的随机标识，不会被重复使用，用户每次登陆所返回的标识都是不一样的。
+	 *  持久标识（Persistent Identifier）：一个随机的ID标识被分配给user，以避免暴露user的真实账户。无论user何时登入，都会returns相同的标识。 SP可以将这个标识和本地的user账号绑定；
+	 *  临时标识（Transient Identifier）：临时标识是一个和user账户没有关系的随机标识，不会被重复使用，user每次登陆所returns的标识都是不一样的。
 	 */
 	@Bean
 	@ConditionalOnMissingBean
@@ -132,12 +138,12 @@ public class ShiroSaml2WebAutoConfiguration extends AbstractShiroWebConfiguratio
 		requestedAuthnContext.getAuthnContextClassRefs().add(authnContextClassRef);
 		
 		/*
-		 * 同时请求认证上下文也可能有多个，如果是这样的情况他们就要安装优先级排列。
-		 * Comparison代表着如何IDP要如何依据所给出的鉴别方式选项处理鉴别结果，其取值包括：
-		 * Minimum，最少策略，满足这个方式或者比它更安全方式就通过验证；
-		 * Better，更优策略，需要满足比这个方式更为安全的方式才能通过验证；
-		 * Exact，精准模式，必须满足当前方式才能通过验证；
-		 * Maximum，最多策略，需要满足安全性最强的方式才能通过认证。
+		 * 同时requestauthentication上下文也可能有多个，如果是这样的情况他们就要安装优先级排列。
+		 * Comparison代table着如何IDP要如何依据所给出的鉴别方式选项处理鉴别结果，其取值包括：
+		 * Minimum，最少策略，满足这个方式或者比它更安全方式就通过validate；
+		 * Better，更优策略，需要满足比这个方式更为安全的方式才能通过validate；
+		 * Exact，精准模式，必须满足当前方式才能通过validate；
+		 * Maximum，最多策略，需要满足安全性最强的方式才能通过authentication。
 		 */
 		switch (properties.getComparisonType()) {
 			case exact: {

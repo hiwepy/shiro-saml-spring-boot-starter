@@ -55,10 +55,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 默认拦截器
- * <p>Shiro内置了很多默认的拦截器，比如身份验证、授权等相关的。默认拦截器可以参考org.apache.shiro.web.filter.mgt.DefaultFilter中的枚举拦截器：&nbsp;&nbsp;</p>
- * 自定义Filter通过@Bean注解后，被Spring Boot自动注册到了容器的Filter
- * chain中，这样导致的结果是，所有URL都会被自定义Filter过滤，而不是Shiro中配置的一部分URL。
+ * default拦截器
+ * <p>Shiro内置了很多default的拦截器，比如身份validate、authorization等相关的。default拦截器可以参考org.apache.shiro.web.filter.mgt.DefaultFilter中的枚举拦截器：&nbsp;&nbsp;</p>
+ * 自定义Filter通过@Bean注解后，被Spring Boot自动registers到了容器的Filter
+ * chain中，这样导致的结果是，所有URL都会被自定义Filter过滤，而不是Shiro中configuration的一部分URL。
  * https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-disable-registration-of-a-servlet-or-filter
  * http://www.jianshu.com/p/bf79fdab9c19
  */
@@ -69,6 +69,12 @@ import org.springframework.context.annotation.Configuration;
 })
 @ConditionalOnWebApplication
 //@ConditionalOnClass({CallbackFilter.class, SecurityFilter.class, LogoutFilter.class})
+/**
+ * ShiroSamlWebFilterConfiguration.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @ConditionalOnProperty(prefix = ShiroSamlProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ ShiroSamlProperties.class, ShiroBizProperties.class, ServerProperties.class })
 public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfiguration implements ApplicationContextAware {
@@ -100,18 +106,18 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 		} else {
 			authzRealm = new SamlStatefulAuthorizingRealm();
 		}
-		// 认证账号信息提供实现：认证信息、角色信息、权限信息；业务系统需要自己实现该接口
+		// authentication账号info提供实现：authenticationinfo、roleinfo、permissioninfo；业务系统需要自己实现该接口
 		authzRealm.setRepository(samlPrincipalRepository);
-		// 凭证匹配器：该对象主要做密码校验
+		// 凭证匹配器：该对象主要做password校验
 		authzRealm.setCredentialsMatcher(new AllowAllCredentialsMatcher());
-		// Realm 执行监听：实现该接口可监听认证失败和成功的状态，从而做业务系统自己的事情，比如记录日志
+		// Realm 执行listener：实现该接口可listenerauthenticationfailure和success的状态，从而做业务系统自己的事情，比如record日志
 		authzRealm.setRealmsListeners(realmsListeners);
-		// 缓存相关的配置：采用提供的默认配置即可
+		// cache相关的configuration：采用提供的defaultconfiguration即可
 		authzRealm.setCachingEnabled(bizProperties.isCachingEnabled());
-		// 认证缓存配置:无状态情况不缓存认证信息
+		// authenticationcacheconfiguration:无状态情况不cacheauthenticationinfo
 		authzRealm.setAuthenticationCachingEnabled(bizProperties.isAuthenticationCachingEnabled());
 		authzRealm.setAuthenticationCacheName(bizProperties.getAuthenticationCacheName());
-		// 授权缓存配置:无状态情况不缓存认证信息
+		// authorizationcacheconfiguration:无状态情况不cacheauthenticationinfo
 		authzRealm.setAuthorizationCachingEnabled(bizProperties.isAuthorizationCachingEnabled());
 		authzRealm.setAuthorizationCacheName(bizProperties.getAuthorizationCacheName());
 
@@ -119,7 +125,7 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 	}
 	
 	/*
-	 * 账号注销过滤器 ：处理账号注销
+	 * 账号注销filter ：处理账号注销
 	 */
 	@Bean("logout")
 	public FilterRegistrationBean<SamlLogoutFilter> logoutFilter(@Autowired(required = false) List<LogoutListener> logoutListeners){
@@ -128,10 +134,10 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 		
 		SamlLogoutFilter logoutFilter = new SamlLogoutFilter();
 	    
-		//注销监听：实现该接口可监听账号注销失败和成功的状态，从而做业务系统自己的事情，比如记录日志
+		//注销listener：实现该接口可listener账号注销failure和success的状态，从而做业务系统自己的事情，比如record日志
 		logoutFilter.setLogoutListeners(logoutListeners);
 		logoutFilter.setPostOnlyLogout(bizProperties.isPostOnlyLogout());
-		//登录注销后的重定向地址：直接进入登录页面
+		//login注销后的重定向address：直接进入login页面
 		logoutFilter.setRedirectUrl(bizProperties.getRedirectUrl());
 		
 		filterRegistration.setFilter(logoutFilter);
@@ -141,7 +147,7 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 	}
 	
 	/*
-	 * 权限控制过滤器 ：实现权限认证
+	 * permission控制filter ：实现permissionauthentication
 	 */
 	@Bean("authc")
 	public FilterRegistrationBean<SamlAuthenticatingFilter> authenticationFilter(
@@ -154,24 +160,24 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 		
 		SamlAuthenticatingFilter authcFilter = new SamlAuthenticatingFilter();
 		
-		// 登录监听：实现该接口可监听账号登录失败和成功的状态，从而做业务系统自己的事情，比如记录日志
+		// loginlistener：实现该接口可listener账号loginfailure和success的状态，从而做业务系统自己的事情，比如record日志
 		authcFilter.setLoginListeners(loginListeners);
-		// 认证失败次数计数器实现
+		// authenticationfailure次数计数器实现
 		authcFilter.setFailureCounter(authcFailureCounter);
-		// Session 状态设置：是否无状态Session
+		// Session 状态sets：whether无状态Session
 		authcFilter.setSessionStateless(bizProperties.isSessionStateless());
-		// 是否启用验证码
+		// whetherenablecaptcha
 		if(kaptchaProperties.isEnabled()) {
-			// 登陆失败重试次数，超出限制需要输入验证码
+			// 登陆failureretry次数，超出限制需要输入captcha
 			authcFilter.setRetryTimesWhenAccessDenied(kaptchaProperties.getRetryTimesWhenAccessDenied());
-			// 是否验证验证码
+			// whethervalidatecaptcha
 			authcFilter.setCaptchaEnabled(kaptchaProperties.isEnabled());
-			// 验证码解析器
+			// captcha解析器
 			authcFilter.setCaptchaResolver(captchaResolver);
 		}
 		/*
-		 * 自定义Filter通过@Bean注解后，被Spring Boot自动注册到了容器的Filter
-		 * chain中，这样导致的结果是，所有URL都会被自定义Filter过滤， 而不是Shiro中配置的一部分URL。下面方式可以解决该问题
+		 * 自定义Filter通过@Bean注解后，被Spring Boot自动registers到了容器的Filter
+		 * chain中，这样导致的结果是，所有URL都会被自定义Filter过滤， 而不是Shiro中configuration的一部分URL。下面方式可以解决该问题
 		 */
 		FilterRegistrationBean<SamlAuthenticatingFilter> registration = new FilterRegistrationBean<SamlAuthenticatingFilter>(
 				authcFilter);
@@ -180,7 +186,7 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 	}
 	 
 	/**
-	 * 权限控制过滤器 ：权限过滤链的入口（仅是FactoryBean需要引用）
+	 * permission控制filter ：permission过滤链的入口（仅是FactoryBean需要引用）
 	 */
 	@Bean
     @Override
@@ -188,13 +194,13 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 
 		ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterProxyFactoryBean();
 		
-		// 登录地址：会话不存在时访问的地址
+		// loginaddress：session不存在时访问的address
 		filterFactoryBean.setLoginUrl(bizProperties.getLoginUrl());
-		// 系统主页：登录成功后跳转路径
+		// 系统主页：loginsuccess后跳转path
 		filterFactoryBean.setSuccessUrl(bizProperties.getSuccessUrl());
-		// 异常页面：无权限时的跳转路径
+		// exception页面：无permission时的跳转path
 		filterFactoryBean.setUnauthorizedUrl(bizProperties.getUnauthorizedUrl());
-		// 必须设置 SecurityManager
+		// 必须sets SecurityManager
 		filterFactoryBean.setSecurityManager(securityManager);
 		// 拦截规则
 		filterFactoryBean.setFilterChainDefinitionMap(shiroFilterChainDefinition.getFilterChainMap());
@@ -203,7 +209,7 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 	}
 	
 	/**
-	 * 权限控制过滤器 ：权限过滤链的入口
+	 * permission控制filter ：permission过滤链的入口
 	 */
 	@Bean(name = "filterShiroFilterRegistrationBean")
     protected FilterRegistrationBean<AbstractShiroFilter> filterShiroFilterRegistrationBean() throws Exception {

@@ -18,6 +18,12 @@ package org.apache.shiro.spring.boot;
 import org.apache.shiro.spring.boot.saml.AuthnContextComparisonType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * ShiroSamlProperties.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @ConfigurationProperties(ShiroSamlProperties.PREFIX)
 public class ShiroSamlProperties {
 
@@ -28,13 +34,13 @@ public class ShiroSamlProperties {
 	 */
 	private boolean enabled = false;
 
-	/** 目标URL：AuthnRequest的目标地址，IDP地址 */
+	/** 目标URL：AuthnRequest的目标address，IDPaddress */
 	private String destinationURL;
-	/** SP地址： SAML断言返回的地址 */
+	/** SPaddress： SAML断言returns的address */
     private String assertionConsumerServiceURL;
 	/** SPID：一般是SP的URL */
     private String spEntityId;
-    /** 异常页面：无权限时的跳转路径 */
+    /** exception页面：无permission时的跳转path */
     private String unauthorizedUrl;
     private boolean forceAuthn;
     

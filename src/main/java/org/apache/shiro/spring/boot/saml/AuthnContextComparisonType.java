@@ -21,13 +21,13 @@ package org.apache.shiro.spring.boot.saml;
  */
 public enum AuthnContextComparisonType {
 
-	/** Exact，精准模式，必须满足当前方式才能通过验证； */
+	/** Exact，精准模式，必须满足当前方式才能通过validate； */
 	exact,
-	/** Minimum，最少策略，满足这个方式或者比它更安全方式就通过验证；*/
+	/** Minimum，最少策略，满足这个方式或者比它更安全方式就通过validate；*/
 	minimum,
-	/** Maximum，最多策略，需要满足安全性最强的方式才能通过认证；*/
+	/** Maximum，最多策略，需要满足安全性最强的方式才能通过authentication；*/
 	maximum,
-	/** Better，更优策略，需要满足比这个方式更为安全的方式才能通过验证；*/
+	/** Better，更优策略，需要满足比这个方式更为安全的方式才能通过validate；*/
 	better;
 	
 }

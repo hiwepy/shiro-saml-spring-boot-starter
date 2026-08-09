@@ -23,6 +23,12 @@ import org.opensaml.xml.security.credential.Credential;
 import org.opensaml.xml.signature.SignableXMLObject;
 import org.opensaml.xml.signature.Signature;
 import org.opensaml.xml.signature.Signer;
+/**
+ * SignatureUtils.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 public class SignatureUtils {
 

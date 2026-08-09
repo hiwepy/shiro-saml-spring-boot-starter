@@ -51,6 +51,12 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(ShiroEhCache2CacheConfiguration.class)
 @ConditionalOnWebApplication
 //@ConditionalOnClass({AuthnContextClassRef.class, RequestedAuthnContext.class })
+/**
+ * ShiroSamlWebAutoConfiguration.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @ConditionalOnProperty(prefix = ShiroSamlProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ ShiroBizProperties.class })
 public class ShiroSamlWebAutoConfiguration extends AbstractShiroWebConfiguration {
@@ -61,7 +67,7 @@ public class ShiroSamlWebAutoConfiguration extends AbstractShiroWebConfiguration
 	@PostConstruct
 	public void init() {
 		
-		// Step 1: OpenSAML初始化过程
+		// Step 1: OpenSAMLinitializes过程
 
 		JavaCryptoValidationInitializer javaCryptoValidationInitializer = new JavaCryptoValidationInitializer();
 		try {
@@ -71,8 +77,8 @@ public class ShiroSamlWebAutoConfiguration extends AbstractShiroWebConfiguration
 		}
 		
 		/*
-		 * OpenSAML的初始化依赖于一些列配置文件。OpenSAML已经有一个默认的配置，其已经可以满足大多数的使用需求，如果有需要还可以对其修改。
-		 * 配置文件必须在OpenSAML使用之前被加载，加载默认配置需的方法如下进行：
+		 * OpenSAML的initializes依赖于一些列configuration文件。OpenSAML已经有一个default的configuration，其已经可以满足大多数的使用需求，如果有需要还可以对其修改。
+		 * configuration文件必须在OpenSAML使用之前被加载，加载defaultconfiguration需的方法如下进行：
 		 */
 		try {
 			InitializationService.initialize();

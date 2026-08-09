@@ -2,6 +2,12 @@ package org.apache.shiro.spring.boot.saml.exception;
 
 import org.apache.shiro.authc.AuthenticationException;
 
+/**
+ * IncorrectSamlException.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @SuppressWarnings("serial")
 public class IncorrectSamlException extends AuthenticationException {
 	

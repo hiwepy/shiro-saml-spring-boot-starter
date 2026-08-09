@@ -28,7 +28,7 @@ public final class Saml2Token implements HostAuthenticationToken {
  	private String host;
  	// SAMLRequest 字符串
  	private String SAMLRequest;
- 	// 是否记住客户端认证状态
+ 	// whether记住客户端authentication状态
      private final boolean isRememberMe;
      
      public Saml2Token(String host, String SAMLRequest, boolean isRememberMe) {
