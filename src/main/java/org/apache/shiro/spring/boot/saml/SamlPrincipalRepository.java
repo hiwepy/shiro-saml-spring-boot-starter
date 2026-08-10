@@ -24,7 +24,7 @@ import org.apache.shiro.spring.boot.saml.token.SamlToken;
 
 /**
  * SAML 1.0 Principal Repository
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class SamlPrincipalRepository extends ShiroPrincipalRepositoryImpl {
 
