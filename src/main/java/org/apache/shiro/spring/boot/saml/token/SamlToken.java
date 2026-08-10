@@ -20,7 +20,7 @@ import org.apache.shiro.authc.HostAuthenticationToken;
 
 /**
  * Saml 1.0 Token
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @SuppressWarnings("serial")
 public final class SamlToken implements HostAuthenticationToken {

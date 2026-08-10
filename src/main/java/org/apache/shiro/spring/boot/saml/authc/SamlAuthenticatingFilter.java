@@ -46,7 +46,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * SAML 1.x authentication (authentication)filter
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class SamlAuthenticatingFilter extends TrustableRestAuthenticatingFilter {
 

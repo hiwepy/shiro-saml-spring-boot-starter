@@ -27,7 +27,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * SAML 1.x authorization (authorization)filter
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class SamlAuthorizationFilter extends AbstracAuthorizationFilter {
 

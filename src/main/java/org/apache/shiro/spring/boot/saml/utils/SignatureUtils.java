@@ -24,7 +24,7 @@ import org.opensaml.xml.signature.Signer;
 /**
  * SignatureUtils for SAML request signing.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class SignatureUtils {

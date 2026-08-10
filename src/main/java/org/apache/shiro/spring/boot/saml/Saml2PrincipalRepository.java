@@ -27,7 +27,7 @@ import com.google.common.collect.Sets;
 
 /**
  * SMAL 2.0 Principal Repository
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class Saml2PrincipalRepository extends ShiroPrincipalRepositoryImpl {
     
