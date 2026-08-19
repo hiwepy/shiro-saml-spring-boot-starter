@@ -18,6 +18,7 @@ package org.apache.shiro.spring.boot.saml;
 /**
  * TODO
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public enum AuthnContextComparisonType {
 

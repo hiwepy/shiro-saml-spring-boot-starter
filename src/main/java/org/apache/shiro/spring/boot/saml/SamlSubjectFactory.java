@@ -26,6 +26,7 @@ import org.apache.shiro.subject.SubjectContext;
  * TODO
  * 
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class SamlSubjectFactory extends SessionCreationEnabledSubjectFactory {
 
@@ -34,6 +35,12 @@ public class SamlSubjectFactory extends SessionCreationEnabledSubjectFactory {
 	}
 
 	@Override
+	/**
+	 * create Subject.
+	 *
+	 * @param context the context
+	 * @return the result
+	 */
 	public Subject createSubject(SubjectContext context) {
 
 		boolean authenticated = context.isAuthenticated();

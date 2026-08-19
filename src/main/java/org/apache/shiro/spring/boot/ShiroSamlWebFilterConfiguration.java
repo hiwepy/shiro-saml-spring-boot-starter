@@ -89,6 +89,11 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
 	
 	@Bean
 	@ConditionalOnMissingBean
+	/**
+	 * SAML Principal Repository.
+	 *
+	 * @return the result
+	 */
 	public SamlPrincipalRepository samlPrincipalRepository() {
 		return new SamlPrincipalRepository();
 	}
@@ -219,10 +224,21 @@ public class ShiroSamlWebFilterConfiguration extends AbstractShiroWebFilterConfi
     }
     
     @Override
+  	/**
+  	 * Sets the application context.
+  	 *
+  	 * @param applicationContext the application context
+  	 * @throws BeansException if an error occurs
+  	 */
   	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
   		this.applicationContext = applicationContext;
   	}
 
+  	/**
+  	 * Returns the application context.
+  	 *
+  	 * @return the application context
+  	 */
   	public ApplicationContext getApplicationContext() {
   		return applicationContext;
   	}

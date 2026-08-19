@@ -20,6 +20,7 @@ import org.apache.shiro.authc.HostAuthenticationToken;
 /**
  * Saml 2.0 Token
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public final class Saml2Token implements HostAuthenticationToken {
@@ -38,24 +39,49 @@ public final class Saml2Token implements HostAuthenticationToken {
      }
      
      @Override
+ 	/**
+ 	 * Returns the principal.
+ 	 *
+ 	 * @return the principal
+ 	 */
  	public Object getPrincipal() {
  		return this.SAMLRequest;
  	}
 
  	@Override
+ 	/**
+ 	 * Returns the credentials.
+ 	 *
+ 	 * @return the credentials
+ 	 */
  	public Object getCredentials() {
  		return this.SAMLRequest;
  	}
  	
  	@Override
+ 	/**
+ 	 * Returns the host.
+ 	 *
+ 	 * @return the host
+ 	 */
  	public String getHost() {
  		return host;
  	}
 
+ 	/**
+ 	 * Returns the s a m l request.
+ 	 *
+ 	 * @return the s a m l request
+ 	 */
  	public String getSAMLRequest() {
  		return SAMLRequest;
  	}
  	
+ 	/**
+ 	 * Returns the remember me.
+ 	 *
+ 	 * @return the remember me
+ 	 */
  	public boolean isRememberMe() {
  		return isRememberMe;
  	}

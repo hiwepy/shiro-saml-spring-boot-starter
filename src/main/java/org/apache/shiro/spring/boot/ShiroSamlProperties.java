@@ -53,74 +53,164 @@ public class ShiroSamlProperties {
     /** */
     private AuthnContextComparisonType comparisonType = AuthnContextComparisonType.minimum;
 	
+	/**
+	 * Returns the enabled.
+	 *
+	 * @return the enabled
+	 */
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+	/**
+	 * Sets the enabled.
+	 *
+	 * @param enabled the enabled
+	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
+	/**
+	 * Returns the destination u r l.
+	 *
+	 * @return the destination u r l
+	 */
 	public String getDestinationURL() {
 		return destinationURL;
 	}
 
+	/**
+	 * Sets the destination u r l.
+	 *
+	 * @param destinationURL the destination u r l
+	 */
 	public void setDestinationURL(String destinationURL) {
 		this.destinationURL = destinationURL;
 	}
 
+	/**
+	 * Returns the assertion consumer service u r l.
+	 *
+	 * @return the assertion consumer service u r l
+	 */
 	public String getAssertionConsumerServiceURL() {
 		return assertionConsumerServiceURL;
 	}
 
+	/**
+	 * Sets the assertion consumer service u r l.
+	 *
+	 * @param assertionConsumerServiceURL the assertion consumer service u r l
+	 */
 	public void setAssertionConsumerServiceURL(String assertionConsumerServiceURL) {
 		this.assertionConsumerServiceURL = assertionConsumerServiceURL;
 	}
 
+	/**
+	 * Returns the sp entity id.
+	 *
+	 * @return the sp entity id
+	 */
 	public String getSpEntityId() {
 		return spEntityId;
 	}
 
+	/**
+	 * Sets the sp entity id.
+	 *
+	 * @param spEntityId the sp entity id
+	 */
 	public void setSpEntityId(String spEntityId) {
 		this.spEntityId = spEntityId;
 	}
 
+	/**
+	 * Returns the unauthorized url.
+	 *
+	 * @return the unauthorized url
+	 */
 	public String getUnauthorizedUrl() {
 		return unauthorizedUrl;
 	}
 
+	/**
+	 * Sets the unauthorized url.
+	 *
+	 * @param unauthorizedUrl the unauthorized url
+	 */
 	public void setUnauthorizedUrl(String unauthorizedUrl) {
 		this.unauthorizedUrl = unauthorizedUrl;
 	}
 	
+	/**
+	 * Returns the force authn.
+	 *
+	 * @return the force authn
+	 */
 	public boolean isForceAuthn() {
 		return forceAuthn;
 	}
 
+	/**
+	 * Sets the force authn.
+	 *
+	 * @param forceAuthn the force authn
+	 */
 	public void setForceAuthn(boolean forceAuthn) {
 		this.forceAuthn = forceAuthn;
 	}
 
+	/**
+	 * Returns the comparison type.
+	 *
+	 * @return the comparison type
+	 */
 	public AuthnContextComparisonType getComparisonType() {
 		return comparisonType;
 	}
 
+	/**
+	 * Sets the comparison type.
+	 *
+	 * @param comparisonType the comparison type
+	 */
 	public void setComparisonType(AuthnContextComparisonType comparisonType) {
 		this.comparisonType = comparisonType;
 	}
 
+	/**
+	 * Returns the saml request parameter name.
+	 *
+	 * @return the saml request parameter name
+	 */
 	public String getSamlRequestParameterName() {
 		return samlRequestParameterName;
 	}
 
+	/**
+	 * Sets the saml request parameter name.
+	 *
+	 * @param samlRequestParameterName the saml request parameter name
+	 */
 	public void setSamlRequestParameterName(String samlRequestParameterName) {
 		this.samlRequestParameterName = samlRequestParameterName;
 	}
 
+	/**
+	 * Returns the relay state parameter name.
+	 *
+	 * @return the relay state parameter name
+	 */
 	public String getRelayStateParameterName() {
 		return relayStateParameterName;
 	}
 
+	/**
+	 * Sets the relay state parameter name.
+	 *
+	 * @param relayStateParameterName the relay state parameter name
+	 */
 	public void setRelayStateParameterName(String relayStateParameterName) {
 		this.relayStateParameterName = relayStateParameterName;
 	}

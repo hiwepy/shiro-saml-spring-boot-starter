@@ -65,6 +65,10 @@ public class ShiroSamlWebAutoConfiguration extends AbstractShiroWebConfiguration
 	private ShiroBizProperties bizProperties;
 
 	@PostConstruct
+	/**
+	 * init.
+	 *
+	 */
 	public void init() {
 		
 		// Step 1: OpenSAMLinitializes过程

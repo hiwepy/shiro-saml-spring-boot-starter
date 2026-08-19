@@ -25,10 +25,18 @@ import org.apache.shiro.spring.boot.saml.token.SamlToken;
 /**
  * SAML 1.0 Principal Repository
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class SamlPrincipalRepository extends ShiroPrincipalRepositoryImpl {
 
 	@Override
+	/**
+	 * get Authentication Info.
+	 *
+	 * @param token the token
+	 * @return the result
+	 * @throws AuthenticationException if an error occurs
+	 */
 	public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		
 		SamlToken samlToken = (SamlToken) token;

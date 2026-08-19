@@ -47,6 +47,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * SAML 2.x authentication (authentication)filter
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter {
 
@@ -226,18 +227,38 @@ public class Saml2AuthenticatingFilter extends TrustableRestAuthenticatingFilter
         return token;
     }
 
+	/**
+	 * Returns the authorization header name.
+	 *
+	 * @return the authorization header name
+	 */
 	public String getAuthorizationHeaderName() {
 		return authorizationHeaderName;
 	}
 
+	/**
+	 * Sets the authorization header name.
+	 *
+	 * @param authorizationHeaderName the authorization header name
+	 */
 	public void setAuthorizationHeaderName(String authorizationHeaderName) {
 		this.authorizationHeaderName = authorizationHeaderName;
 	}
 
+	/**
+	 * Returns the authorization param name.
+	 *
+	 * @return the authorization param name
+	 */
 	public String getAuthorizationParamName() {
 		return authorizationParamName;
 	}
 
+	/**
+	 * Sets the authorization param name.
+	 *
+	 * @param authorizationParamName the authorization param name
+	 */
 	public void setAuthorizationParamName(String authorizationParamName) {
 		this.authorizationParamName = authorizationParamName;
 	}

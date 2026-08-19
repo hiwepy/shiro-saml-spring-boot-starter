@@ -24,6 +24,7 @@ import net.shibboleth.utilities.java.support.security.RandomIdentifierGeneration
 
 /**
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
 public class OpenSAMLUtils {
@@ -31,6 +32,11 @@ public class OpenSAMLUtils {
 	private static XMLObjectBuilderFactory builderFactory = XMLObjectProviderRegistrySupport.getBuilderFactory();
 	private static RandomIdentifierGenerationStrategy secureRandomIdGenerator = new RandomIdentifierGenerationStrategy();
 
+	/**
+	 * generate Secure Random ID.
+	 *
+	 * @return the result
+	 */
 	public static String generateSecureRandomId() {
 		return secureRandomIdGenerator.generateIdentifier();
 	}

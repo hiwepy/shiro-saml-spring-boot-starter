@@ -62,6 +62,12 @@ import org.springframework.context.annotation.Configuration;
 	"org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration",  // shiro-spring-boot-web-starter
 	"org.apache.shiro.spring.boot.ShiroBizWebAutoConfiguration" // spring-boot-starter-shiro-biz
 })
+/**
+ * <p>Configuration properties.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 @AutoConfigureAfter(ShiroEhCache2CacheConfiguration.class)
 @ConditionalOnWebApplication
 @ConditionalOnClass({AuthnContextClassRef.class, RequestedAuthnContext.class })
@@ -73,6 +79,10 @@ public class ShiroSaml2WebAutoConfiguration extends AbstractShiroWebConfiguratio
 	private ShiroBizProperties bizProperties;
 
 	@PostConstruct
+	/**
+	 * init.
+	 *
+	 */
 	public void init() {
 		
 		// Step 1: OpenSAMLinitializes过程

@@ -12,10 +12,16 @@ import org.apache.shiro.subject.PrincipalCollection;
 /**
  * SAML 1.0 Stateless AuthorizingRealm
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class SamlStatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 
 	@Override
+	/**
+	 * Returns the authentication token class.
+	 *
+	 * @return the authentication token class
+	 */
 	public Class<?> getAuthenticationTokenClass() {
 		return SamlToken.class;// 此Realm只支持SamlToken
 	}

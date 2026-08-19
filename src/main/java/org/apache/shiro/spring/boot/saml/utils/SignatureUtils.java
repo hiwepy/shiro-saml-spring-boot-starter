@@ -74,26 +74,56 @@ public class SignatureUtils {
         }
     }
 
+    /**
+     * Returns the signing credential.
+     *
+     * @return the signing credential
+     */
     public Credential getSigningCredential() {
         return signingCredential;
     }
 
+    /**
+     * Sets the signing credential.
+     *
+     * @param signingCredential the signing credential
+     */
     public void setSigningCredential(Credential signingCredential) {
         this.signingCredential = signingCredential;
     }
 
+    /**
+     * Returns the canonicalization algorithm.
+     *
+     * @return the canonicalization algorithm
+     */
     public String getCanonicalizationAlgorithm() {
         return canonicalizationAlgorithm;
     }
 
+    /**
+     * Sets the canonicalization algorithm.
+     *
+     * @param canonicalizationAlgorithm the canonicalization algorithm
+     */
     public void setCanonicalizationAlgorithm(String canonicalizationAlgorithm) {
         this.canonicalizationAlgorithm = canonicalizationAlgorithm;
     }
 
+    /**
+     * Returns the signature algorithm.
+     *
+     * @return the signature algorithm
+     */
     public String getSignatureAlgorithm() {
         return signatureAlgorithm;
     }
 
+    /**
+     * Sets the signature algorithm.
+     *
+     * @param signatureAlgorithm the signature algorithm
+     */
     public void setSignatureAlgorithm(String signatureAlgorithm) {
         this.signatureAlgorithm = signatureAlgorithm;
     }

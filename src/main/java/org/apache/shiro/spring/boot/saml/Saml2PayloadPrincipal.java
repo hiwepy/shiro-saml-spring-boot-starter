@@ -20,6 +20,7 @@ import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
 /**
  * TODO
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class Saml2PayloadPrincipal extends ShiroPrincipal {
@@ -31,6 +32,11 @@ public class Saml2PayloadPrincipal extends ShiroPrincipal {
 		this.payload = payload;
 	}
 	
+	/**
+	 * Returns the payload.
+	 *
+	 * @return the payload
+	 */
 	public String getPayload() {
 		return payload;
 	}

@@ -28,6 +28,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * SAML 2.x authorization (authorization)filter
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class Saml2AuthorizationFilter extends AbstracAuthorizationFilter {
 
@@ -42,6 +43,15 @@ public class Saml2AuthorizationFilter extends AbstracAuthorizationFilter {
 	private String authorizationParamName = AUTHORIZATION_PARAM;
 	
 	@Override
+	/**
+	 * on Pre Handle.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param mappedValue the mapped value
+	 * @return the result
+	 * @throws Exception if an error occurs
+	 */
 	public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
 		return super.onPreHandle(request, response, mappedValue);
 	}
@@ -139,18 +149,38 @@ public class Saml2AuthorizationFilter extends AbstracAuthorizationFilter {
         return token;
     }
 
+    /**
+     * Returns the authorization header name.
+     *
+     * @return the authorization header name
+     */
     public String getAuthorizationHeaderName() {
 		return authorizationHeaderName;
 	}
 
+	/**
+	 * Sets the authorization header name.
+	 *
+	 * @param authorizationHeaderName the authorization header name
+	 */
 	public void setAuthorizationHeaderName(String authorizationHeaderName) {
 		this.authorizationHeaderName = authorizationHeaderName;
 	}
 	
+	/**
+	 * Returns the authorization param name.
+	 *
+	 * @return the authorization param name
+	 */
 	public String getAuthorizationParamName() {
 		return authorizationParamName;
 	}
 
+	/**
+	 * Sets the authorization param name.
+	 *
+	 * @param authorizationParamName the authorization param name
+	 */
 	public void setAuthorizationParamName(String authorizationParamName) {
 		this.authorizationParamName = authorizationParamName;
 	}

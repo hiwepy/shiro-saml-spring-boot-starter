@@ -58,6 +58,7 @@ import org.w3c.dom.Element;
  * https://www.jianshu.com/p/d041935641b4
  * https://www.jianshu.com/p/6f61fa7be0b6
  * https://www.jianshu.com/p/6c72408fa480
+ * @since 1.0.0
  */
 public class AuthnRequestUtils {
 
@@ -198,6 +199,11 @@ public class AuthnRequestUtils {
 		return authnRequest;
 	}
 
+	/**
+	 * generate Request U R L.
+	 *
+	 * @throws Exception if an error occurs
+	 */
 	public void generateRequestURL() throws Exception {
 		String consumerServiceUrl = "http://localhost:8080/consume.jsp"; // Set this for your app
 		String website = "https://www.efesco.com"; // Set this for your app
